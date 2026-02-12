@@ -41,8 +41,6 @@ source ~/.bashrc && nvm install --lts
 
 ## API Keys Required (`~/.env_secrets`)
 
-- `OPENAI_API_KEY`
-- `HF_TOKEN`
-- `GITHUB_TOKEN` / `GITHUB_PERSONAL_ACCESS_TOKEN`
-- `BRAVE_API_KEY`
-- `LINEAR_API_KEY`
+- `GITHUB_TOKEN` — GitHub MCP, gh CLI
+- `BRAVE_API_KEY` — Brave Search MCP
+- `LINEAR_API_KEY` — Linear 커맨드
