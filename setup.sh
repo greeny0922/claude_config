@@ -1,6 +1,6 @@
 #!/bin/bash
 # Claude Code one-line remote setup
-# Usage: curl -sL https://raw.githubusercontent.com/gkswns0531/claude-config/master/setup.sh | bash -s -- <GITHUB_TOKEN>
+# Usage: bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: application/vnd.github.v3.raw" https://api.github.com/repos/gkswns0531/claude-config/contents/setup.sh) <GITHUB_TOKEN>
 # Or:    bash setup.sh <GITHUB_TOKEN>
 set -e
 

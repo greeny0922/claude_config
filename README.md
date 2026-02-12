@@ -14,7 +14,7 @@ curl -fsSL https://claude.ai/install.sh | bash
 ```bash
 # T=토큰 한번만 설정하면 끝
 T=<GITHUB_TOKEN>
-bash <(curl -sL -H "Authorization: token $T" -H "Accept: application/vnd.github.v3.raw" https://api.github.com/repos/gkswns0531/claude-config/contents/setup.sh) "$T"
+bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: application/vnd.github.v3.raw" https://api.github.com/repos/gkswns0531/claude-config/contents/setup.sh) "$T"
 ```
 
 SSH 키 필요 없음. HTTPS + PAT로 clone 후 자동 설치 & 정리.
