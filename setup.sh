@@ -66,7 +66,7 @@ elif command -v apk &>/dev/null; then
     PKG_INSTALL="apk add --quiet"
 fi
 
-for pkg in jq nano; do
+for pkg in jq; do
     if ! command -v "$pkg" &>/dev/null; then
         if [ -n "$PKG_INSTALL" ]; then
             $PKG_INSTALL "$pkg" >/dev/null 2>&1 && echo "[OK] $pkg installed" || echo "[!!] $pkg install failed"
@@ -92,7 +92,14 @@ command -v docker &>/dev/null && echo "[OK] docker" || echo "[--] docker (option
 
 echo ""
 echo "=== Done ==="
-echo "Next:"
-echo "  1. Edit API keys:  nano ~/.env_secrets"
-echo "  2. Reload shell:   source ~/.bashrc"
-echo "  3. Login Claude:   claude login"
+echo "Next: paste the following with your keys filled in:"
+echo ""
+echo '  cat > ~/.env_secrets << '\''EOF'\'''
+echo '  export GITHUB_TOKEN="<your-token>"'
+echo '  export BRAVE_API_KEY="<your-key>"'
+echo '  export LINEAR_API_KEY="<your-key>"'
+echo '  EOF'
+echo ""
+echo "Then:"
+echo "  source ~/.bashrc"
+echo "  claude login"
