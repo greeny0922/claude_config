@@ -1,0 +1,34 @@
+# Secrets - NEVER commit
+.env_secrets
+*.key
+*.pem
+
+# Claude Code runtime state
+.claude.json
+.claude.json.backup.*
+
+# Generated content / cache
+.claude/projects/
+.claude/file-history/
+.claude/paste-cache/
+.claude/stats-cache.json
+.claude/history.jsonl
+.claude/research/
+.claude/docs/
+.claude/plans/
+.claude/plugins/
+.claude/cache/
+.claude/config/
+.claude/debug/
+.claude/downloads/
+.claude/ide/
+.claude/session-env/
+.claude/shell-snapshots/
+.claude/statsig/
+.claude/tasks/
+.claude/telemetry/
+.claude/todos/
+.claude/usage-data/
+
+# OS
+.DS_Store
