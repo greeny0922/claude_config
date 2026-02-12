@@ -5,17 +5,8 @@ Portable Claude Code configuration for quick setup on ephemeral remote servers.
 ## 0. Install Claude Code
 
 ```bash
-# Node.js 18+ 필요
-npm install -g @anthropic-ai/claude-code@latest
-```
-
-Node.js가 없으면:
-```bash
-# nvm으로 설치
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-source ~/.bashrc
-nvm install --lts
-npm install -g @anthropic-ai/claude-code@latest
+# Native install (권장, 자동 업데이트 지원)
+curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 ## 1. One-liner Setup (Remote/Ephemeral)
