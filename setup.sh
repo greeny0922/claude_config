@@ -49,6 +49,11 @@ if ! grep -q 'source.*\.env_secrets' "$SHELL_RC" 2>/dev/null; then
     echo "[OK] Added source to $SHELL_RC"
 fi
 
+if ! grep -q '\.local/bin' "$SHELL_RC" 2>/dev/null; then
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$SHELL_RC"
+    echo "[OK] Added ~/.local/bin to PATH in $SHELL_RC"
+fi
+
 # 5. Cleanup cloned repo
 rm -rf "$REPO_DIR"
 
