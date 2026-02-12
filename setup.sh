@@ -71,7 +71,7 @@ elif command -v apk &>/dev/null; then
     PKG_INSTALL="apk add --quiet"
 fi
 
-for pkg in jq; do
+for pkg in jq tmux; do
     if ! command -v "$pkg" &>/dev/null; then
         if [ -n "$PKG_INSTALL" ]; then
             $PKG_INSTALL "$pkg" >/dev/null 2>&1 && echo "[OK] $pkg installed" || echo "[!!] $pkg install failed"
