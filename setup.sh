@@ -1,7 +1,6 @@
 #!/bin/bash
 # Claude Code one-line remote setup
-# Usage: bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: application/vnd.github.v3.raw" https://api.github.com/repos/gkswns0531/claude-config/contents/setup.sh) <GITHUB_TOKEN>
-# Or:    bash setup.sh <GITHUB_TOKEN>
+# Usage: T=<TOKEN> && bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: application/vnd.github.v3.raw" https://api.github.com/repos/gkswns0531/claude-config/contents/setup.sh) "$T"
 set -e
 
 TOKEN="${1:-$GITHUB_TOKEN}"
@@ -35,7 +34,7 @@ echo "[OK] ~/.claude/ config installed"
 # 3. Set up .env_secrets
 if [ ! -f "$HOME/.env_secrets" ]; then
     cp "$REPO_DIR/.env_secrets.example" "$HOME/.env_secrets"
-    echo "[!!] ~/.env_secrets created - fill in your API keys: vi ~/.env_secrets"
+    echo "[!!] ~/.env_secrets created from template"
 else
     echo "[OK] ~/.env_secrets already exists"
 fi
@@ -53,20 +52,39 @@ fi
 # 5. Cleanup cloned repo
 rm -rf "$REPO_DIR"
 
-# 6. Dependency check
+# 6. Install missing dependencies
 echo ""
-echo "=== Dependencies ==="
-for cmd in node npx jq; do
-    if command -v "$cmd" &>/dev/null; then
-        echo "[OK] $cmd"
+echo "=== Installing Dependencies ==="
+
+if ! command -v jq &>/dev/null; then
+    if command -v apt-get &>/dev/null; then
+        apt-get update -qq && apt-get install -y -qq jq >/dev/null 2>&1 && echo "[OK] jq installed" || echo "[!!] jq install failed"
+    elif command -v yum &>/dev/null; then
+        yum install -y -q jq >/dev/null 2>&1 && echo "[OK] jq installed" || echo "[!!] jq install failed"
+    elif command -v apk &>/dev/null; then
+        apk add --quiet jq >/dev/null 2>&1 && echo "[OK] jq installed" || echo "[!!] jq install failed"
     else
-        echo "[!!] $cmd - MISSING"
+        echo "[!!] jq - MISSING (install manually)"
     fi
-done
-command -v docker &>/dev/null && echo "[OK] docker" || echo "[--] docker (optional)"
+else
+    echo "[OK] jq"
+fi
+
+if ! command -v node &>/dev/null; then
+    echo "[..] Installing Node.js via nvm..."
+    curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash >/dev/null 2>&1
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+    nvm install --lts >/dev/null 2>&1 && echo "[OK] Node.js $(node --version) installed" || echo "[!!] Node.js install failed"
+else
+    echo "[OK] node $(node --version)"
+fi
+
+command -v docker &>/dev/null && echo "[OK] docker" || echo "[--] docker (optional, for GitHub MCP)"
 
 echo ""
 echo "=== Done ==="
-echo "1. Fill API keys:  vi ~/.env_secrets"
-echo "2. Reload shell:   source ~/.env_secrets"
-echo "3. Login Claude:   claude login"
+echo "Next:"
+echo "  1. Edit API keys:  nano ~/.env_secrets"
+echo "  2. Reload shell:   source ~/.bashrc"
+echo "  3. Login Claude:   claude login"
