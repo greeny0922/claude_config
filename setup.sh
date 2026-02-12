@@ -56,19 +56,27 @@ rm -rf "$REPO_DIR"
 echo ""
 echo "=== Installing Dependencies ==="
 
-if ! command -v jq &>/dev/null; then
-    if command -v apt-get &>/dev/null; then
-        apt-get update -qq && apt-get install -y -qq jq >/dev/null 2>&1 && echo "[OK] jq installed" || echo "[!!] jq install failed"
-    elif command -v yum &>/dev/null; then
-        yum install -y -q jq >/dev/null 2>&1 && echo "[OK] jq installed" || echo "[!!] jq install failed"
-    elif command -v apk &>/dev/null; then
-        apk add --quiet jq >/dev/null 2>&1 && echo "[OK] jq installed" || echo "[!!] jq install failed"
-    else
-        echo "[!!] jq - MISSING (install manually)"
-    fi
-else
-    echo "[OK] jq"
+PKG_INSTALL=""
+if command -v apt-get &>/dev/null; then
+    apt-get update -qq >/dev/null 2>&1
+    PKG_INSTALL="apt-get install -y -qq"
+elif command -v yum &>/dev/null; then
+    PKG_INSTALL="yum install -y -q"
+elif command -v apk &>/dev/null; then
+    PKG_INSTALL="apk add --quiet"
 fi
+
+for pkg in jq nano; do
+    if ! command -v "$pkg" &>/dev/null; then
+        if [ -n "$PKG_INSTALL" ]; then
+            $PKG_INSTALL "$pkg" >/dev/null 2>&1 && echo "[OK] $pkg installed" || echo "[!!] $pkg install failed"
+        else
+            echo "[!!] $pkg - MISSING (install manually)"
+        fi
+    else
+        echo "[OK] $pkg"
+    fi
+done
 
 if ! command -v node &>/dev/null; then
     echo "[..] Installing Node.js via nvm..."
