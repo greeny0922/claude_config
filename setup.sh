@@ -93,7 +93,24 @@ else
     echo "[OK] node $(node --version)"
 fi
 
-command -v docker &>/dev/null && echo "[OK] docker" || echo "[--] docker (optional, for GitHub MCP)"
+# 7. Register MCP servers
+echo ""
+echo "=== MCP Servers ==="
+
+export PATH="$HOME/.local/bin:$PATH"
+
+if command -v claude &>/dev/null; then
+    # nvm이 현재 세션에서 로드 안 됐을 수 있으므로
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+    claude mcp add memory -- npx -y @modelcontextprotocol/server-memory 2>/dev/null && echo "[OK] memory" || echo "[!!] memory failed"
+    claude mcp add mermaid -- npx -y claude-mermaid 2>/dev/null && echo "[OK] mermaid" || echo "[!!] mermaid failed"
+    claude mcp add brave-search -- npx -y @modelcontextprotocol/server-brave-search 2>/dev/null && echo "[OK] brave-search" || echo "[!!] brave-search failed"
+    claude mcp add github -- npx -y @modelcontextprotocol/server-github 2>/dev/null && echo "[OK] github" || echo "[!!] github failed"
+else
+    echo "[!!] claude not found - install first, then run: claude mcp add ..."
+fi
 
 echo ""
 echo "=== Done ==="
