@@ -24,8 +24,7 @@
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true,
     "atlassian@claude-plugins-official": true,
-    "linear@claude-plugins-official": true,
-    "github@claude-plugins-official": false
+    "linear@claude-plugins-official": true
   },
   "hooks": {
     "PreToolUse": [
