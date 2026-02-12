@@ -118,6 +118,7 @@ echo "Next: paste the following with your keys filled in:"
 echo ""
 echo '  cat > ~/.env_secrets << '\''EOF'\'''
 echo '  export GITHUB_TOKEN="<your-token>"'
+echo '  export HF_TOKEN="<your-token>"'
 echo '  export BRAVE_API_KEY="<your-key>"'
 echo '  export LINEAR_API_KEY="<your-key>"'
 echo '  EOF'

@@ -14,6 +14,7 @@ T=<GITHUB_TOKEN> && bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: ap
 # 3. API 키 입력 (값 채워서 통째로 복붙)
 cat > ~/.env_secrets << 'EOF'
 export GITHUB_TOKEN=""
+export HF_TOKEN=""
 export BRAVE_API_KEY=""
 export LINEAR_API_KEY=""
 EOF
@@ -36,5 +37,6 @@ claude login
 ## API Keys
 
 - `GITHUB_TOKEN` — GitHub MCP, gh CLI
+- `HF_TOKEN` — HuggingFace
 - `BRAVE_API_KEY` — Brave Search MCP
 - `LINEAR_API_KEY` — Linear 커맨드
