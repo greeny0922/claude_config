@@ -4,21 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) across all projects.
 
 ## Development Standards
 
+- **Clarity over cleverness** — write code that a junior engineer can read, understand, and maintain without tribal knowledge. Prefer explicit intent, straightforward control flow, and self-evident naming over compact or abstract constructs.
 - **Type hints mandatory** for all new code (Python 3.10+ syntax)
 - **PEP 8** compliance with 120-character line length
-- **Domain isolation** - work on one domain at a time when working with DDD projects
-- **Repository pattern** for all data access
 - **Small PR sizes** mandatory for human review
 
 ## Testing
 
-- **Framework**: pytest with Django integration where applicable
+- **Framework**: pytest
 - **Test Discovery**: `test_*.py` pattern
 - **Requirements**: Type hints mandatory for test methods (`-> None`)
 
-## Security and Best Practices
+## Security
 
 - Never commit secrets or API keys
 - Use environment variables for configuration
-- Follow Django security best practices where applicable
-- Maintain domain boundaries and dependency contracts
