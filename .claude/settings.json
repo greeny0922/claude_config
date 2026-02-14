@@ -9,22 +9,17 @@
       "Read",
       "Edit",
       "Write",
+      "Glob",
+      "Grep",
       "WebFetch",
       "WebSearch",
       "NotebookEdit",
       "Task",
-      "mcp__brave-search",
-      "mcp__linear-server",
       "mcp__github",
       "mcp__memory",
       "mcp__mermaid"
     ],
     "deny": []
-  },
-  "enabledPlugins": {
-    "pyright-lsp@claude-plugins-official": true,
-    "atlassian@claude-plugins-official": true,
-    "linear@claude-plugins-official": true
   },
   "hooks": {
     "PreToolUse": [
@@ -38,5 +33,8 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true
   }
 }
