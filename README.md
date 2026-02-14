@@ -9,7 +9,7 @@ Portable Claude Code configuration for quick setup on ephemeral remote servers.
 curl -fsSL https://claude.ai/install.sh | bash
 
 # 2. 설정 세팅 (T에 GitHub PAT 넣기)
-T=<GITHUB_TOKEN> && bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: application/vnd.github.v3.raw" https://api.github.com/repos/gkswns0531/claude-config/contents/setup.sh) "$T"
+T=<GITHUB_TOKEN> && bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: application/vnd.github.v3.raw" https://api.github.com/repos/greeny0922/claude_config/contents/setup.sh) "$T"
 
 # 3. API 키 입력 (값 채워서 통째로 복붙)
 cat > ~/.env_secrets << 'EOF'
