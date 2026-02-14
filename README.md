@@ -3,7 +3,6 @@
 Portable Claude Code configuration for quick setup on ephemeral remote servers.
 
 ## Setup
-
 ```bash
 # 1. Claude Code 설치
 curl -fsSL https://claude.ai/install.sh | bash
@@ -15,8 +14,6 @@ T=<GITHUB_TOKEN> && bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: ap
 cat > ~/.env_secrets << 'EOF'
 export GITHUB_TOKEN=""
 export HF_TOKEN=""
-export BRAVE_API_KEY=""
-export LINEAR_API_KEY=""
 EOF
 
 # 4. 환경변수 로드 & 인증
@@ -38,5 +35,3 @@ claude login
 
 - `GITHUB_TOKEN` — GitHub MCP, gh CLI
 - `HF_TOKEN` — HuggingFace
-- `BRAVE_API_KEY` — Brave Search MCP
-- `LINEAR_API_KEY` — Linear 커맨드

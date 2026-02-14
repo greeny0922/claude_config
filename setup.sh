@@ -1,6 +1,6 @@
 #!/bin/bash
 # Claude Code one-line remote setup
-# Usage: T=<TOKEN> && bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: application/vnd.github.v3.raw" https://api.github.com/repos/gkswns0531/claude-config/contents/setup.sh) "$T"
+# Usage: T=<TOKEN> && bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: application/vnd.github.v3.raw" https://api.github.com/repos/greeny0922/claude_config/contents/setup.sh) "$T"
 set -e
 
 TOKEN="${1:-$GITHUB_TOKEN}"
@@ -11,13 +11,13 @@ if [ -z "$TOKEN" ]; then
     exit 1
 fi
 
-REPO_DIR="$(mktemp -d)/claude-config"
+REPO_DIR="$(mktemp -d)/claude_config"
 
 echo "=== Claude Code Remote Setup ==="
 
 # 1. Clone private repo via HTTPS + PAT
 echo "[..] Cloning config repo..."
-git clone --quiet "https://${TOKEN}@github.com/gkswns0531/claude-config.git" "$REPO_DIR"
+git clone --quiet "https://${TOKEN}@github.com/greeny0922/claude_config.git" "$REPO_DIR"
 echo "[OK] Repo cloned"
 
 # 2. Copy config files
@@ -100,13 +100,11 @@ echo "=== MCP Servers ==="
 export PATH="$HOME/.local/bin:$PATH"
 
 if command -v claude &>/dev/null; then
-    # nvm이 현재 세션에서 로드 안 됐을 수 있으므로
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
     claude mcp add memory -- npx -y @modelcontextprotocol/server-memory 2>/dev/null && echo "[OK] memory" || echo "[!!] memory failed"
     claude mcp add mermaid -- npx -y claude-mermaid 2>/dev/null && echo "[OK] mermaid" || echo "[!!] mermaid failed"
-    claude mcp add brave-search -- npx -y @modelcontextprotocol/server-brave-search 2>/dev/null && echo "[OK] brave-search" || echo "[!!] brave-search failed"
     claude mcp add github -- npx -y @modelcontextprotocol/server-github 2>/dev/null && echo "[OK] github" || echo "[!!] github failed"
 else
     echo "[!!] claude not found - install first, then run: claude mcp add ..."
@@ -119,10 +117,13 @@ echo ""
 echo '  cat > ~/.env_secrets << '\''EOF'\'''
 echo '  export GITHUB_TOKEN="<your-token>"'
 echo '  export HF_TOKEN="<your-token>"'
-echo '  export BRAVE_API_KEY="<your-key>"'
-echo '  export LINEAR_API_KEY="<your-key>"'
 echo '  EOF'
 echo ""
 echo "Then:"
 echo "  source ~/.bashrc"
 echo "  claude login"
+```
+
+실행 명령어:
+```
+T=<GITHUB_TOKEN> && bash <(curl -sL -H "Authorization: Bearer $T" -H "Accept: application/vnd.github.v3.raw" https://api.github.com/repos/greeny0922/claude_config/contents/setup.sh) "$T"ㄴ
